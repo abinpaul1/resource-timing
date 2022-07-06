@@ -54,5 +54,98 @@ Resource Timing Level 2 ([w3c/resource-timing#327](https://github.com/w3c/resour
 - [4.3](https://w3c.github.io/resource-timing/#sec-performanceresourcetiming) : Adding new field to interface : renderBlockingStatus
 - Getter steps for `renderBlockingStatus` return `"blocking"` if [timing-info](https://w3c.github.io/resource-timing/#dfn-timing-info)'s newly added render-blocking field is `true`, else `"non-blocking"`
 
+## Security/Privacy Considerations
+
+- The field does not reveal any new cross-origin information. With respect to ResourceTiming, each frame only reports on the resources fetched by itself, and not any child IFRAMEs and hence no new info is made available.
+
+### [Self-Review Questionnaire: Security and Privacy](https://w3ctag.github.io/security-questionnaire/)
+
+> 01.  What information might this feature expose to Web sites or other parties,
+>      and for what purposes is that exposure necessary?
+
+It exposes information relating to if a particular resource blocks rendering or not.
+
+> 02.  Do features in your specification expose the minimum amount of information
+>      necessary to enable their intended uses?
+
+Yes
+
+> 03.  How do the features in your specification deal with personal information,
+>      personally-identifiable information (PII), or information derived from
+>      them?
+
+It does not deal with such information.
+
+> 04.  How do the features in your specification deal with sensitive information?
+
+It does not deal with sensitive information.
+
+> 05.  Do the features in your specification introduce new state for an origin
+>      that persists across browsing sessions?
+
+No.
+
+> 06.  Do the features in your specification expose information about the
+>      underlying platform to origins?
+
+No.
+
+> 07.  Does this specification allow an origin to send data to the underlying
+>      platform?
+
+No.
+
+> 08.  Do features in this specification enable access to device sensors?
+
+No.
+
+> 09.  Do features in this specification enable new script execution/loading
+>      mechanisms?
+
+No.
+
+> 10.  Do features in this specification allow an origin to access other devices?
+
+No.
+
+> 11.  Do features in this specification allow an origin some measure of control over
+>      a user agent's native UI?
+
+No.
+
+> 12.  What temporary identifiers do the features in this specification create or
+>      expose to the web?
+
+None.
+
+> 13.  How does this specification distinguish between behavior in first-party and
+>      third-party contexts?
+
+No distinction.
+
+> 14.  How do the features in this specification work in the context of a browser’s
+>      Private Browsing or Incognito mode?
+
+No difference.
+
+> 15.  Does this specification have both "Security Considerations" and "Privacy
+>      Considerations" sections?
+
+No.
+
+> 16.  Do features in your specification enable origins to downgrade default
+>      security protections?
+
+No.
+
+> 17.  How does your feature handle non-"fully active" documents?
+
+No difference.
+
+> 18.  What should this questionnaire have asked?
+
+None.
+
 ## Changelog
 - Update 1 - Spec changes modified to reuse `Request`'s `render-blocking` boolean.
+- Update 2 - Added section for Privacy/Security considerations
