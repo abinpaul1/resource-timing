@@ -1,6 +1,6 @@
 # Render Blocking Status
 
-Proposal to add a new field `render blocking status` to PerformanceResourceTiming which holds a string highlighting the status of stylesheets and scripts.
+Proposal to add a new field `render blocking status` to PerformanceResourceTiming which is an [enum](https://webidl.spec.whatwg.org/#idl-enums)  highlighting the status of stylesheets and scripts.
 
 ## Use cases
 
@@ -19,10 +19,15 @@ The PerformanceResourceTiming Interface in <a href="https://w3c.github.io/resour
 interface PerformanceResourceTiming : PerformanceEntry {
     ...
     ...
-    readonly attribute DOMString renderBlockingStatus;
+    readonly attribute RenderBlockingStatusType renderBlockingStatus;
     ...
     ...
     [Default] object toJSON();
+};
+
+enum RenderBlockingStatusType {
+    "blocking",
+    "non-blocking"
 };
 ```
 
@@ -35,7 +40,7 @@ console.log(entry_list[0].renderBlockingStatus);
 
 ## Render Blocking Status Values
 
-The following values are proposed for the resource blocking status
+The following values are proposed for the resource blocking status enum
 
 `blocking` - A potentially render blocking resource
 
@@ -52,7 +57,9 @@ Fetch ([whatwg/fetch#1449](https://github.com/whatwg/fetch/pull/1449))
 
 Resource Timing Level 2 ([w3c/resource-timing#327](https://github.com/w3c/resource-timing/pull/327))
 - [4.3](https://w3c.github.io/resource-timing/#sec-performanceresourcetiming) : Adding new field to interface : renderBlockingStatus
-- Getter steps for `renderBlockingStatus` return `"blocking"` if [timing-info](https://w3c.github.io/resource-timing/#dfn-timing-info)'s newly added render-blocking field is `true`, else `"non-blocking"`
+- A [PerformanceResourceTiming](https://w3c.github.io/resource-timing/#dom-performanceresourcetiming) has an associated  `RenderBlockingStatusType`  render blocking status.
+- [4.3.1] Add new `RenderBlockingStatusType` enum which can have 2 defined values. `blocking` if [timing-info](https://w3c.github.io/resource-timing/#dfn-timing-info)'s newly added render-blocking field is true and `non-blocking` if its false
+- Getter steps for `renderBlockingStatus` returns `RenderBlockingStatusType` enum
 
 ## Security/Privacy Considerations
 
@@ -149,3 +156,4 @@ None.
 ## Changelog
 - Update 1 - Spec changes modified to reuse `Request`'s `render-blocking` boolean.
 - Update 2 - Added section for Privacy/Security considerations
+- Update 3 - Change type to enum as per TAG suggestion
